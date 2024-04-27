@@ -16,7 +16,7 @@ import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 public class TopNavbarMenu extends S8WebObject {
 
 	
-	public final static String WEBPATH = PalmWebSources.ROOT_WEBPATH + "/navbars/under/UnderlinedNavbarMenu";
+	public final static String WEBPATH = PalmWebSources.ROOT_WEBPATH + "/navbars/top/TopNavbarMenu";
 	
 	
 	/**
