@@ -1,0 +1,33 @@
+
+
+
+
+.palm-topbar {
+    margin: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+
+.palm-topbar-left {
+    display: flex;
+    gap: 8px;
+}
+
+.palm-topbar-right {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.palm-topbar-imgbutton {
+    height: 32px;
+    width: 32px;
+    background-size: contain;
+}
