@@ -7,6 +7,10 @@
 module com.s8.fwks.palm {
 	
 	
+	exports com.s8.fwks.palm.boxes.b2;
+	exports com.s8.fwks.palm.boxes.paper;
+	
+	
 	exports com.s8.fwks.palm.breadcrumbs;
 	exports com.s8.fwks.palm.navbars.top;
 	exports com.s8.fwks.palm.topbar;
