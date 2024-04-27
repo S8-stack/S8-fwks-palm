@@ -67,7 +67,7 @@ export class TopNavbar extends S8Object {
 
     /**
      * 
-     * @param {NavbarMenu[]} menus 
+     * @param {TopNavbarMenu[]} menus 
      */
     S8_set_menus(menus){
         let n = menus.length;

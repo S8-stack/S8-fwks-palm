@@ -35,18 +35,18 @@ export class TopNavbarMenu extends S8Object {
     constructor(){
         super();
         this.wrapperNode = document.createElement("div");
-        this.wrapperNode.classList.add("topnavbar-menu");
+        this.wrapperNode.classList.add("palm-topnavbar-menu");
 
         this.labelNode = document.createElement("div");
-        this.labelNode.classList.add("topnavbar-menu-label");
+        this.labelNode.classList.add("palm-topnavbar-menu-label");
         this.wrapperNode.appendChild(this.labelNode);
 
         this.iconNode = document.createElement("div");
-        this.iconNode.classList.add("topnavbar-menu-icon");
+        this.iconNode.classList.add("palm-topnavbar-menu-icon");
         this.labelNode.appendChild(this.iconNode);
 
         this.nameNode = document.createElement("div");
-        this.nameNode.classList.add("topnavbar-menu-name");
+        this.nameNode.classList.add("palm-topnavbar-menu-name");
         this.labelNode.appendChild(this.nameNode);
         
         this.wrapperNode.setAttribute("selected", "true");

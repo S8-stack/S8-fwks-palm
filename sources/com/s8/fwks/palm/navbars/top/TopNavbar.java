@@ -5,7 +5,6 @@ import java.util.List;
 import com.s8.api.web.S8WebFront;
 import com.s8.fwks.palm.PalmWebSources;
 import com.s8.pkgs.ui.carbide.CarbideSize;
-import com.s8.pkgs.ui.carbide.CarbideWebSources;
 import com.s8.pkgs.ui.carbide.HTML_S8WebNode;
 
 
@@ -18,7 +17,7 @@ public class TopNavbar extends HTML_S8WebNode {
 	
 	
 	
-	public final static String JS_TYPENAME = "/navbars/top/TopNavbar";
+	public final static String WEBPATH = PalmWebSources.ROOT_WEBPATH + "/navbars/top/TopNavbar";
 	
 	
 
@@ -29,7 +28,7 @@ public class TopNavbar extends HTML_S8WebNode {
 	 */
 	
 	public TopNavbar(S8WebFront front) {
-		super(front, PalmWebSources.ROOT_WEBPATH + JS_TYPENAME);
+		super(front, WEBPATH);
 	}
 	
 	
@@ -38,7 +37,7 @@ public class TopNavbar extends HTML_S8WebNode {
 	 * @param front
 	 */
 	public TopNavbar(S8WebFront front, CarbideSize size) {
-		super(front, CarbideWebSources.ROOT_WEBPATH + JS_TYPENAME);
+		super(front, WEBPATH);
 		setSize(size);
 	}
 	
