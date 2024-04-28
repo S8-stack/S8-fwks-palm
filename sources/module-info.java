@@ -20,6 +20,10 @@ module com.s8.fwks.palm {
 	
 	exports com.s8.fwks.palm.pages.simple;
 	
+
+	
+	exports com.s8.fwks.palm.workspace.grid;
+	
 	
 	
 	requires transitive com.s8.api;

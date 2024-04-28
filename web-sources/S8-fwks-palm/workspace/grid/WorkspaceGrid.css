@@ -1,0 +1,266 @@
+
+
+
+/** */
+.workspace-grid-wrapper {
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	padding: 32px 5% 32px 5%;
+	background-color: white;
+	overflow-y: scroll;
+}
+
+.workspace-grid-core {
+	display: grid;
+    /* flex-direction: row; */
+    /* flex-wrap: wrap; */
+    grid-template-columns: repeat(auto-fill, 208px);
+	grid-template-rows: repeat(auto-fill, 208px);
+	grid-gap: 24px 24px;
+    grid-auto-flow: row dense;
+}
+
+
+.workspace-grid-card-wrapper {
+	box-sizing: content-box;
+	position: relative;
+	padding: 14px;
+	/* z-index: 32; */
+}
+
+.workspace-grid-card-shape {
+	box-sizing: content-box;
+   
+}
+
+/* all cards */
+
+.workspace-grid-card {
+	margin: 0px;
+	padding: 0px;
+	border-radius: 16px;
+    box-shadow: 0px 0px 4px rgb(172, 172, 172);
+	cursor: pointer;
+}
+
+/* <size> */
+.workspace-grid-card[size = "std"]{
+	grid-column: auto / span 1;
+    grid-row: auto / span 1;
+	height: 208px;
+}
+
+.workspace-grid-card[size = "large-horizontal"]{
+	grid-column: auto / span 2; 
+	grid-row: auto / span 1;
+	height: 208px;
+}
+
+.workspace-grid-card[size = "large-vertical"]{
+	grid-column: auto / span 1; 
+    grid-row: auto / span 2;
+	height: 440px;
+}
+
+.workspace-grid-card[size = "large-square"]{
+	grid-column: auto / span 2;
+    grid-row: auto / span 2;
+	height: 440px;
+}
+/* </size> */
+
+
+/* <type> */
+
+.workspace-grid-card[type = "create"] {
+	border-radius: 24px;
+    border: 8px dashed rgb(204, 204, 204);
+    background-color: white;
+    overflow: hidden;
+	color: rgb(200, 200, 200);
+}
+
+.workspace-grid-card[type = "create"]:hover {
+    border-color: aqua;
+}
+
+
+
+.workspace-grid-card[type = "access"] {
+	border: 1px solid rgb(182, 182, 182);
+	background-color:  white;
+	background-image: url("/S8-pkgs-ui-carbide/collections/grids/pics/turbine-pic.png");
+	background-size: cover;
+	overflow: hidden;
+}
+
+.workspace-grid-card[type = "access"]:hover{
+	outline: 8px solid rgb(203 223 255);
+}
+
+
+/* </type> */
+
+
+
+/* <theme> */
+.workspace-grid-card[theme = "light"] {
+	border-color: rgb(204, 204, 204);
+}
+
+.workspace-grid-card[theme = "light"] h1 {
+	color: rgb(36, 36, 36);
+	/* text-shadow: 0px 1px 8px white; */
+	/*background-color: rgba(255, 255, 255, 0.36);*/
+	backdrop-filter: blur(16px);
+	border-radius: 4px;
+}
+
+
+.workspace-grid-card[theme = "light"] h2 {
+	color: rgb(36, 36, 36);
+    background-color: rgb(196, 196, 196);
+}
+
+.workspace-grid-card[theme = "light"] p {
+	color: rgb(36, 36, 36);
+	/*text-shadow: 0px 0px 4px white;*/
+	background-color: rgba(255, 255, 255, 0.36);
+}
+
+.workspace-grid-card[theme = "dark"] {
+	border-color: rgb(80, 80, 80);
+}
+
+.workspace-grid-card[theme = "dark"] h1 {
+	color: white;
+	text-shadow: 0px 1px 8px black;
+}
+
+.workspace-grid-card[theme = "dark"] h2 {
+	color: white;
+    background-color: rgb(48, 48, 48);
+}
+
+.workspace-grid-card[theme = "dark"] p {
+	color: white;
+	text-shadow: 0px 0px 4px black;
+}
+
+/* </theme> */
+
+
+
+
+/* <create-card> */
+
+
+.workspace-grid-card-create-header {
+	font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 128px;
+    font-weight: bold;
+    letter-spacing: -0.016em;
+  	text-align: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: rgb(200, 200, 200);
+}
+
+.workspace-grid-card-create-body {
+	font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.016em;
+  	text-align: center;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: rgb(200, 200, 200);
+}
+
+/* <create-card> */
+
+
+
+/* <repository-card> */
+
+
+.workspace-grid-card-access[selected]{
+	border: 2px solid #769ff4;
+	box-shadow: 0px 0px 4px rgb(103, 143, 167);
+}
+
+
+.workspace-grid-card-access-image {
+	height: 128px;
+	width: 100%;
+	background-image: url("/S8-pkgs-ui-carbide/collections/grids/pics/turbine-pic.png");
+	background-size: cover;
+	border-bottom: 1px solid rgb(182, 182, 182);
+}
+
+
+.workspace-grid-card-access-panel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.016em;
+  	text-align: left;
+	margin: 6px 8px 0px 8px;
+	max-height: 32px;
+	color: white;
+}
+
+.workspace-grid-card-access-panel > h1 {
+    width: fit-content;
+	font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.016em;
+  	text-align: left;
+	margin: 10px 2px 0px 2px;
+	padding: 2px 6px 2px 6px;
+}
+
+.workspace-grid-card-access-panel > h2 {
+    width: fit-content;
+	display: block;
+	font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.016em;
+    text-align: left;
+    margin: 10px 8px 0px 8px;
+    padding: 2.25px 8px;
+    background-color: rgb(53, 53, 53);
+    border-radius: 9px;
+}
+
+.workspace-grid-card-access-panel > p {
+    width: fit-content;
+	font-size: 14px;
+	font-weight: 400;
+    letter-spacing: -0.016em;
+  	text-align: left;
+	margin: 10px 8px 0px 8px;
+	padding: 0px;
+}
+
+.workspace-grid-card-access-info {
+	font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.016em;
+  	text-align: left;
+	height: 32px;
+	margin: 6px 8px 12px 8px;
+	text-overflow: ellipsis;
+}
+
+
+.workspace-grid-card-access-popover-root {
+	height: 16px;
+	width: 16px;
+	position: relative;
+	margin-left: 72px;
+}
+
+/* </repository-card> */
