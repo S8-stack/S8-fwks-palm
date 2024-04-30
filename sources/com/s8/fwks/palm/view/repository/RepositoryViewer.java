@@ -10,6 +10,9 @@ import com.s8.api.flow.repository.requests.CloneBranchS8Request;
 import com.s8.api.flow.repository.requests.GetRepositoryMetadataS8Request;
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
+import com.s8.fwks.palm.components.list.AccessStdListRow;
+import com.s8.fwks.palm.components.list.StdList;
+import com.s8.fwks.palm.components.list.StdListRow;
 import com.s8.fwks.palm.components.pages.simple.SimplePage;
 import com.s8.fwks.palm.components.structs.gs.GsBody;
 import com.s8.fwks.palm.components.structs.gs.GsHeader;
@@ -18,9 +21,6 @@ import com.s8.fwks.palm.view.branch.PalmProjectViewer;
 import com.s8.pkgs.ui.carbide.CarbideSize;
 import com.s8.pkgs.ui.carbide.breadcrumbs.Breadcrumbs;
 import com.s8.pkgs.ui.carbide.breadcrumbs.BreadcrumbsNode;
-import com.s8.pkgs.ui.carbide.collections.lists.std.AccessStdListRow;
-import com.s8.pkgs.ui.carbide.collections.lists.std.StdList;
-import com.s8.pkgs.ui.carbide.collections.lists.std.StdListRow;
 import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 import com.s8.pkgs.ui.carbide.navbars.under.UnderlinedNavbar;
 import com.s8.pkgs.ui.carbide.navbars.under.UnderlinedNavbarMenu;
@@ -239,6 +239,8 @@ public class RepositoryViewer {
 				exception.printStackTrace();
 			}
 		});
+		
+		flow.send();
 
 	}
 }
