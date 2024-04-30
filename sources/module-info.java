@@ -4,12 +4,14 @@
 /**
  * 
  */
-module com.s8.fwks.palm {
+open module com.s8.fwks.palm {
 	
 	
 	
 	exports com.s8.fwks.palm.model.branch;
 	exports com.s8.fwks.palm.model.space;
+	exports com.s8.fwks.palm.model.user;
+	
 	
 	exports com.s8.fwks.palm.view;
 	exports com.s8.fwks.palm.view.branch;
@@ -40,6 +42,7 @@ module com.s8.fwks.palm {
 	requires transitive com.s8.api;
 	requires transitive com.s8.pkgs.ui.carbide;
 	requires com.s8.pkgs.people;
+	requires com.s8.core.web.xenon;
 	
 	
 }
