@@ -72,14 +72,14 @@ export class B2Column extends S8Object {
 
     /**
      * 
-     * @param {number} width 
+     * @param {string} width 
      */
     S8_set_width(width) {
-        if (width < 0) { /* clear width */
+        if (width == "clear") { /* clear width */
             this.wrapperNode.style.removeProperty("width");
         }
-        else if (width > 0) {
-            this.wrapperNode.style.width = `${width * 100}vw`;
+        else {
+            this.wrapperNode.style.width = width;
         }
     }
 
