@@ -7,27 +7,35 @@
 module com.s8.fwks.palm {
 	
 	
-	exports com.s8.fwks.palm.boxes.b2;
-	exports com.s8.fwks.palm.boxes.paper;
+	
+	exports com.s8.fwks.palm.model;
+	
+	exports com.s8.fwks.palm.view;
 	
 	
-	exports com.s8.fwks.palm.breadcrumbs;
-	exports com.s8.fwks.palm.navbars.top;
-	exports com.s8.fwks.palm.topbar;
 	
-	exports com.s8.fwks.palm.structs.columns;
-	exports com.s8.fwks.palm.structs.gs;
+	/* <components> */
+	exports com.s8.fwks.palm.components.boxes.b2;
+	exports com.s8.fwks.palm.components.boxes.paper;
 	
-	exports com.s8.fwks.palm.pages.simple;
 	
+	exports com.s8.fwks.palm.components.breadcrumbs;
+	exports com.s8.fwks.palm.components.navbars.top;
+	exports com.s8.fwks.palm.components.topbar;
+	
+	exports com.s8.fwks.palm.components.structs.columns;
+	exports com.s8.fwks.palm.components.structs.gs;
+	
+	exports com.s8.fwks.palm.components.pages.simple;
+	
+	exports com.s8.fwks.palm.components.workspace.grid;
 
-	
-	exports com.s8.fwks.palm.workspace.grid;
-	
+	/* </components> */
 	
 	
 	requires transitive com.s8.api;
 	requires transitive com.s8.pkgs.ui.carbide;
+	requires com.s8.pkgs.people;
 	
 	
 }
