@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.s8.api.flow.S8AsyncFlow;
 import com.s8.api.flow.space.requests.AccessSpaceS8Request;
-import com.s8.api.flow.space.requests.AccessSpaceS8Request.Status;
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
 import com.s8.fwks.palm.components.breadcrumbs.Breadcrumbs;
@@ -25,9 +24,6 @@ import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard;
 import com.s8.fwks.palm.model.space.PalmSpace;
 import com.s8.pkgs.people.menu.P8MenuIcon;
 import com.s8.pkgs.ui.carbide.CarbideSize;
-import com.s8.pkgs.ui.carbide.collections.grids.r2.R2Grid;
-import com.s8.pkgs.ui.carbide.collections.grids.r2.R2GridCard;
-import com.s8.pkgs.ui.carbide.cube.WrapperCubeElement;
 import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 
 /**
@@ -126,12 +122,38 @@ public class WorkspaceViewer {
 			
 			page.setElements(pageObjects);
 			isInitialized = true;
-		}
-		
+		}	
 	}
+	
+	
+	private void refresh(PalmSpace space) {
+		// refresh
+		List<WorkspaceGridCard> cardViews = new ArrayList<>();
 
 
-	public void refresh(S8AsyncFlow flow) {
+		/*
+		 * Create repo card
+		 */
+		//cardViews.add(createRepoCardViewer.getView(front, gridView));
+
+
+		/**
+		 * Already existing repositories
+		 */
+		space.forEachRepository(access -> {
+			String repoAddress = access.repositoryAddress;
+			AccessRepoCardViewer cardViewer = cardViewers.computeIfAbsent(repoAddress, address -> new AccessRepoCardViewer(address));
+			cardViewer.update(front, access);
+			cardViews.add(cardViewer.getView());
+		});
+
+		grid.setCards(cardViews);	
+	}
+	
+	
+
+
+	public void view(S8AsyncFlow flow) {
 		
 		flow.runBlock(0, () -> {
 			initialize();
@@ -148,49 +170,22 @@ public class WorkspaceViewer {
 			@Override
 			public void onAccessed(Status status, Object[] objects) {
 				if(status == Status.OK) {
+					
+					/* retrive space */
 					PalmSpace space = (PalmSpace) objects[0];
-
-					// refresh
-					List<WorkspaceGridCard> cardViews = new ArrayList<>();
-
-
-					/*
-					 * Create repo card
-					 */
-					//cardViews.add(createRepoCardViewer.getView(front, gridView));
-
-
-					/**
-					 * Already existing repositories
-					 */
-					space.forEachRepository(access -> {
-						String repoAddress = access.repositoryAddress;
-						AccessRepoCardViewer cardViewer = cardViewers.computeIfAbsent(repoAddress, key -> 
-							new AccessRepoCardViewer(SpaceViewer.this, repoAddress));
-						cardViews.add(cardViewer.getView(front, flow, gridView));
-					});
-
-					gridView.setCards(cardViews);		
+					
+					/* refresh space */
+					refresh(space);
+					
+					/* publish */
+					page.publish();
+				}
+				else {
+					System.out.println("[WorkspaceViewer] error due to: "+status);
 				}
 			}
 		});
-
+		
+		flow.send();
 	}
-
-
-	/**
-	 * 
-	 * 
-	 * @param branch
-	 * @return
-	 */
-	public WrapperCubeElement getGridView(S8WebFront branch, S8AsyncFlow flow) {
-		initialize(branch);
-		refresh(branch, flow);
-		return wrapperCubeElement;
-	}
-
-
-	
-	
 }

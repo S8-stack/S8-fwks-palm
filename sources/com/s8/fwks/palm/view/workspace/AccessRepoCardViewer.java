@@ -1,13 +1,10 @@
 package com.s8.fwks.palm.view.workspace;
 
-import com.s8.api.flow.S8AsyncFlow;
-import com.s8.api.flow.repository.objects.S8RepositoryMetadata;
-import com.s8.api.flow.repository.requests.GetRepositoryMetadataS8Request;
 import com.s8.api.web.S8WebFront;
 import com.s8.fwks.palm.components.workspace.grid.AccessWorkspaceGridCard;
+import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size;
+import com.s8.fwks.palm.model.space.PalmRepositoryAccess;
 import com.s8.fwks.palm.view.repository.RepositoryViewer;
-import com.s8.pkgs.ui.carbide.collections.grids.r2.AccessR2GridCard;
-import com.s8.pkgs.ui.carbide.collections.grids.r2.R2Grid;
 
 /**
  * 
@@ -48,6 +45,9 @@ public class AccessRepoCardViewer extends RepoCardViewer {
 	private void initialize(S8WebFront front) {
 		/* <initialize> */
 		if(cardView == null) {
+			
+			cardView = new AccessWorkspaceGridCard(front);
+			cardView.setSize(Size.STANDARD);
 
 			// on click
 			cardView.onClick(flow -> {
@@ -69,39 +69,23 @@ public class AccessRepoCardViewer extends RepoCardViewer {
 	 * @param front
 	 * @param flow
 	 */
-	public void refresh(S8WebFront front, S8AsyncFlow flow) {
-
-		/* <refresh> */
-		flow.getRepository(new GetRepositoryMetadataS8Request(repositoryAddress) {
-
-			@Override
-			public void onSucceed(Status status, S8RepositoryMetadata metadata) {
-				if(status == Status.OK) {
-
-					/* refreshing */
-					cardView.setSelected(false);
-					cardView.setTitle(metadata.getName());
-					cardView.setInfo(metadata.getInfo());
-				}
-			}
-
-			@Override
-			public void onFailed(Exception exception) {
-				exception.printStackTrace();
-			}
-		});
-
+	public void refresh(PalmRepositoryAccess repositoryAccess) {
+		cardView.setImageURL(repositoryAccess.imageURL);
+		cardView.setPanelContent("<h1>"+repositoryAccess.title+"</h1><h2>"+repositoryAccess.type+"</h2><p>"+repositoryAccess.info+"</p>");
 		/* </refresh> */
 	}
-
-	public AccessR2GridCard getView(S8WebFront branch, S8AsyncFlow flow, R2Grid grid) {
-
-		initialize(branch, flow, grid);
-
-		refresh(branch, flow);
-
-		return cardView;
+	
+	
+	public void update(S8WebFront front, PalmRepositoryAccess repositoryAccess) {
+		initialize(front);
+		refresh(repositoryAccess);
 	}
 
-
+	
+	@Override
+	public AccessWorkspaceGridCard getView() {
+		return cardView;
+	}
+	
+	
 }

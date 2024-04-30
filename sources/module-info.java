@@ -8,9 +8,13 @@ module com.s8.fwks.palm {
 	
 	
 	
-	exports com.s8.fwks.palm.model;
+	exports com.s8.fwks.palm.model.branch;
+	exports com.s8.fwks.palm.model.space;
 	
 	exports com.s8.fwks.palm.view;
+	exports com.s8.fwks.palm.view.branch;
+	exports com.s8.fwks.palm.view.repository;
+	exports com.s8.fwks.palm.view.workspace;
 	
 	
 	

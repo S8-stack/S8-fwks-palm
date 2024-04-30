@@ -31,9 +31,6 @@ import com.s8.pkgs.ui.carbide.topbar.TopbarImageButton;
 public class RepositoryViewer {
 
 
-
-
-
 	public final S8WebFront front;
 
 	public final String repositoryAddress;

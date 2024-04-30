@@ -4,9 +4,6 @@ import com.s8.api.annotations.S8Field;
 import com.s8.api.annotations.S8ObjectType;
 import com.s8.api.exceptions.S8IOException;
 import com.s8.api.flow.space.objects.SpaceS8Object;
-import com.s8.api.web.S8WebFront;
-import com.s8.fwks.palm.components.workspace.grid.AccessWorkspaceGridCard;
-import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size;
 
 /**
  * 
@@ -51,7 +48,7 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	/**
 	 * 
 	 */
-	public @S8Field(name = "image") String image;
+	public @S8Field(name = "image") String imageURL;
 
 	
 	/**
@@ -102,7 +99,7 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	 * @throws S8IOException
 	 */
 	public void setImage(String image) throws S8IOException {
-		this.image = image;
+		this.imageURL = image;
 		reportFieldUpdate("image");
 	}
 	
@@ -141,20 +138,6 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 
 	
 	
-	/**
-	 * 
-	 * @param front
-	 * @return
-	 */
-	public AccessWorkspaceGridCard view(S8WebFront front) {
-		return AccessWorkspaceGridCard.create(front, Size.STANDARD, image,
-				"<h1>"+title+"</h1><h2>"+type+"</h2><p>"+info+"</p>");
-		
-		
-	}
-	
-	
-
 	
 	
 }
