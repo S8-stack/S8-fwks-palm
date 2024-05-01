@@ -64,7 +64,11 @@ export class BreadcrumbsNode extends S8Object {
             _this.tooltipPopover.show(); 
         }, false);
         this.wrapperNode.addEventListener("mouseleave", function(){ _this.tooltipPopover.hide(); }, false);
-        this.wrapperNode.addEventListener("click", function(){ _this.tooltipPopover.hide(); }, false);
+
+        this.wrapperNode.addEventListener("click", function(){ 
+            _this.tooltipPopover.hide();
+            _this.S8_vertex.runVoid("on-click");
+        }, false);
     }
 
 

@@ -5,7 +5,7 @@
 
 .b2box {
   padding: 0px;
-  margin: 4px;
+  margin: 8px;
   /* offset-x | offset-y | blur-radius | color */
   /*box-shadow: 0px 0px 4px black;*/
   border-radius: 8px;
