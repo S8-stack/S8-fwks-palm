@@ -2,6 +2,7 @@ package com.s8.fwks.palm.components.breadcrumbs;
 
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
+import com.s8.api.web.functions.none.VoidNeFunction;
 import com.s8.fwks.palm.components.PalmWebSources;
 import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 
@@ -11,11 +12,11 @@ import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
  * @author pierreconvert
  *
  */
-public class BreadcrumbsNode extends S8WebObject {
+public class PalmBreadcrumbsNode extends S8WebObject {
 	
 	
-	public static BreadcrumbsNode create(S8WebFront front, SVG_CarbideIcon icon, String text) {
-		BreadcrumbsNode node = new BreadcrumbsNode(front);
+	public static PalmBreadcrumbsNode create(S8WebFront front, SVG_CarbideIcon icon, String text) {
+		PalmBreadcrumbsNode node = new PalmBreadcrumbsNode(front);
 		node.setIcon(icon);
 		node.setText(text);
 		return node;
@@ -29,7 +30,7 @@ public class BreadcrumbsNode extends S8WebObject {
 	 * 
 	 * @param front
 	 */
-	public BreadcrumbsNode(S8WebFront front) {
+	public PalmBreadcrumbsNode(S8WebFront front) {
 		super(front, WEBPATH);
 	}
 	
@@ -53,6 +54,16 @@ public class BreadcrumbsNode extends S8WebObject {
 	public void setText(String text) {
 		vertex.outbound().setStringUTF8Field("text", text);
 	}
+
+
+	/**
+	 * 
+	 * @param function
+	 */
+	public void onClick(VoidNeFunction function) {
+		vertex.inbound().setVoidMethod("on-click", function);
+	}
+	
 	
 	
 }

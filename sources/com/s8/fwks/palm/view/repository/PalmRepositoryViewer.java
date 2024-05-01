@@ -16,6 +16,7 @@ import com.s8.fwks.palm.components.list.StdListRow;
 import com.s8.fwks.palm.components.pages.simple.SimplePage;
 import com.s8.fwks.palm.components.structs.gs.GsBody;
 import com.s8.fwks.palm.components.structs.gs.GsHeader;
+import com.s8.fwks.palm.view.workspace.PalmWorkspaceViewer;
 import com.s8.pkgs.ui.carbide.CarbideSize;
 import com.s8.pkgs.ui.carbide.breadcrumbs.Breadcrumbs;
 import com.s8.pkgs.ui.carbide.breadcrumbs.BreadcrumbsNode;
@@ -29,10 +30,14 @@ import com.s8.pkgs.ui.carbide.topbar.TopbarImageButton;
 /**
  * 
  */
-public class RepositoryViewer {
+public class PalmRepositoryViewer {
 
 
 	public final S8WebFront front;
+	
+	public final PalmWorkspaceViewer workspaceViewer;
+	
+	
 
 	public final String repositoryAddress;
 	
@@ -57,9 +62,10 @@ public class RepositoryViewer {
 	 * 
 	 * @param repositoryAddress
 	 */
-	public RepositoryViewer(S8WebFront front, String repositoryAddress) {
+	public PalmRepositoryViewer(S8WebFront front, PalmWorkspaceViewer workspaceViewer, String repositoryAddress) {
 		super();
 		this.front = front;
+		this.workspaceViewer = workspaceViewer;
 		this.repositoryAddress = repositoryAddress;
 	}
 
@@ -193,7 +199,8 @@ public class RepositoryViewer {
 					page.publish();
 				}
 				else {
-					System.out.println("[Palm/S8RepositoryViewer] failed to display, status: "+status);
+					System.out.println("[Palm/S8RepositoryViewer] failed to display repository " + repositoryAddress 
+							+ ", status: "+status);
 				}
 			}
 

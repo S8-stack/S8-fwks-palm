@@ -6,7 +6,7 @@ import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard;
 /**
  * 
  */
-public abstract class RepoCardViewer {
+public abstract class RepoCard {
 	
 	
 	

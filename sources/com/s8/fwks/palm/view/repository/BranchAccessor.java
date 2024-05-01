@@ -12,19 +12,20 @@ import com.s8.fwks.palm.view.branch.PalmProjectViewer;
  * 
  */
 public class BranchAccessor {
-	
-	public final RepositoryViewer repositoryViewer;
-	
-	public final String repositoryAddress;
-	
-	public final String branchId;
-	
-	
-	
-	private AccessStdListRow row;
-	
 
-	public BranchAccessor(RepositoryViewer repositoryViewer, String branchId) {
+	public final PalmRepositoryViewer repositoryViewer;
+
+	public final String repositoryAddress;
+
+	public final String branchId;
+
+	public PalmProjectViewer projectViewer;
+
+
+	private AccessStdListRow row;
+
+
+	public BranchAccessor(PalmRepositoryViewer repositoryViewer, String branchId) {
 		super();
 		this.repositoryViewer = repositoryViewer;
 		this.repositoryAddress = repositoryViewer.repositoryAddress;
@@ -32,9 +33,9 @@ public class BranchAccessor {
 	}
 
 
-	
-	
-	
+
+
+
 	/**
 	 * Build, Refresh and view
 	 * 
@@ -47,51 +48,51 @@ public class BranchAccessor {
 			row = AccessStdListRow.create(front, branchMetadata.getName(), branchMetadata.getInfo());
 			row.onClick(flow -> {
 				S8RepositoryMetadata repositoryMetadata = repositoryViewer.repositoryMetadata;
-				
-				
-				/**
-				 * 
-				 */
-				flow.cloneBranch(new CloneBranchS8Request(repositoryAddress, branchId) {
 
-					@Override
-					public void onResponse(Status status, Object[] objects) {
-						if(status == Status.OK) {
+				if(projectViewer != null) {
 
-							// offload db
-							flow.runBlock(0, () -> {
+					projectViewer.view();
+					flow.send();
+				}
+				else {
 
-								/*
-								 * retrieve model
-								 */
-								PalmProjectModel model = (PalmProjectModel) objects[0];
+					/**
+					 * 
+					 */
+					flow.cloneBranch(new CloneBranchS8Request(repositoryAddress, branchId) {
 
-								/*
-								 * Create view
-								 */
-								PalmProjectViewer viewer = model.getViewer(front, repositoryMetadata, branchMetadata);
+						@Override
+						public void onResponse(Status status, Object[] objects) {
+							if(status == Status.OK) {
 
+								// offload db
+								flow.runBlock(0, () -> {
 
-								/*
-								 * issue page
-								 */
-								viewer.view();
+									/*
+									 * retrieve model
+									 */
+									PalmProjectModel model = (PalmProjectModel) objects[0];
 
-							});
+									/*
+									 * Create view
+									 */
+									model.view(front, flow, BranchAccessor.this, repositoryMetadata, branchMetadata);
+
+								});
+							}
 						}
-					}
 
-					@Override
-					public void onError(Exception exception) {
-						exception.printStackTrace();
-					}
-				});
-				
-				flow.send();
-				
+						@Override
+						public void onError(Exception exception) {
+							exception.printStackTrace();
+						}
+					});
+					
+					flow.send();
+				}
 			});	
 		}
-		
+
 		return row;
 	}
 

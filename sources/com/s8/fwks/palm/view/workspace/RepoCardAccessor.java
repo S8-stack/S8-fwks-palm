@@ -4,16 +4,17 @@ import com.s8.api.web.S8WebFront;
 import com.s8.fwks.palm.components.workspace.grid.AccessWorkspaceGridCard;
 import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size;
 import com.s8.fwks.palm.model.space.PalmRepositoryAccess;
-import com.s8.fwks.palm.view.repository.RepositoryViewer;
+import com.s8.fwks.palm.view.repository.PalmRepositoryViewer;
 
 /**
  * 
  * @author pierreconvert
  *
  */
-public class AccessRepoCardViewer extends RepoCardViewer {
+public class RepoCardAccessor extends RepoCard {
 
 	
+	public final PalmWorkspaceViewer workspaceViewer;
 
 	/**
 	 * 
@@ -27,7 +28,7 @@ public class AccessRepoCardViewer extends RepoCardViewer {
 	private AccessWorkspaceGridCard cardView;
 
 	
-	private RepositoryViewer repositoryViewer;
+	private PalmRepositoryViewer repositoryViewer;
 
 
 
@@ -36,8 +37,9 @@ public class AccessRepoCardViewer extends RepoCardViewer {
 	 * @param repositoryAddress
 	 * @param cardView
 	 */
-	public AccessRepoCardViewer(String repositoryAddress) {
+	public RepoCardAccessor(PalmWorkspaceViewer workspaceViewer, String repositoryAddress) {
 		super();
+		this.workspaceViewer = workspaceViewer;
 		this.repositoryAddress = repositoryAddress;
 	}
 
@@ -53,7 +55,7 @@ public class AccessRepoCardViewer extends RepoCardViewer {
 			cardView.onClick(flow -> {
 				
 				if(repositoryViewer == null) {
-					repositoryViewer = new RepositoryViewer(front, repositoryAddress);
+					repositoryViewer = new PalmRepositoryViewer(front, workspaceViewer, repositoryAddress);
 				}
 				
 				repositoryViewer.view(flow);

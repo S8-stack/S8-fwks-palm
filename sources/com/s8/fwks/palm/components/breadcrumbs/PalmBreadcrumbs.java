@@ -11,7 +11,7 @@ import com.s8.pkgs.ui.carbide.HTML_S8WebNode;
  * @author pierreconvert
  *
  */
-public class Breadcrumbs extends HTML_S8WebNode {
+public class PalmBreadcrumbs extends HTML_S8WebNode {
 	
 	
 	
@@ -25,7 +25,7 @@ public class Breadcrumbs extends HTML_S8WebNode {
 	 * @param front
 	 */
 	
-	public Breadcrumbs(S8WebFront front) {
+	public PalmBreadcrumbs(S8WebFront front) {
 		super(front, WEBPATH);
 	}
 	
@@ -45,7 +45,7 @@ public class Breadcrumbs extends HTML_S8WebNode {
 	 * 
 	 * @param items
 	 */
-	public void setItems(BreadcrumbsNode[] items) {
+	public void setItems(PalmBreadcrumbsNode[] items) {
 		vertex.outbound().setObjectListField("items", items);
 	}
 	

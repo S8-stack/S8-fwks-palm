@@ -9,8 +9,8 @@ import com.s8.api.flow.S8AsyncFlow;
 import com.s8.api.flow.space.requests.AccessSpaceS8Request;
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
-import com.s8.fwks.palm.components.breadcrumbs.Breadcrumbs;
-import com.s8.fwks.palm.components.breadcrumbs.BreadcrumbsNode;
+import com.s8.fwks.palm.components.breadcrumbs.PalmBreadcrumbs;
+import com.s8.fwks.palm.components.breadcrumbs.PalmBreadcrumbsNode;
 import com.s8.fwks.palm.components.navbars.top.TopNavbar;
 import com.s8.fwks.palm.components.navbars.top.TopNavbarMenu;
 import com.s8.fwks.palm.components.pages.simple.SimplePage;
@@ -29,12 +29,12 @@ import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 /**
  * 
  */
-public class WorkspaceViewer {
+public class PalmWorkspaceViewer {
 	
 	public final S8WebFront front;
 	
 
-	private final Map<String, AccessRepoCardViewer> cardViewers = new HashMap<>();
+	private final Map<String, RepoCardAccessor> cardViewers = new HashMap<>();
 
 	private boolean isInitialized = false;
 	
@@ -48,7 +48,7 @@ public class WorkspaceViewer {
 	 * 
 	 * @param alphaView
 	 */
-	public WorkspaceViewer(S8WebFront front) {
+	public PalmWorkspaceViewer(S8WebFront front) {
 		super();
 		this.front = front;
 	}
@@ -72,9 +72,9 @@ public class WorkspaceViewer {
 			TopbarImageButton imageButton = new TopbarImageButton(front);
 			imageButton.setImageURL("/logos/alphaventor-logo.png");
 			
-			Breadcrumbs breadcrumbs = new Breadcrumbs(front);
-			breadcrumbs.setItems(new BreadcrumbsNode[] {
-					BreadcrumbsNode.create(front, SVG_CarbideIcon.home, "Workspace")
+			PalmBreadcrumbs breadcrumbs = new PalmBreadcrumbs(front);
+			breadcrumbs.setItems(new PalmBreadcrumbsNode[] {
+					PalmBreadcrumbsNode.create(front, SVG_CarbideIcon.home, "Workspace")
 			});
 
 			TopbarIconTextButton button1 = TopbarIconTextButton.create(front, SVG_CarbideIcon.sync, "Sync");
@@ -142,7 +142,7 @@ public class WorkspaceViewer {
 		 */
 		space.forEachRepository(access -> {
 			String repoAddress = access.repositoryAddress;
-			AccessRepoCardViewer cardViewer = cardViewers.computeIfAbsent(repoAddress, address -> new AccessRepoCardViewer(address));
+			RepoCardAccessor cardViewer = cardViewers.computeIfAbsent(repoAddress, address -> new RepoCardAccessor(this, address));
 			cardViewer.update(front, access);
 			cardViews.add(cardViewer.getView());
 		});
