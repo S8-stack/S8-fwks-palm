@@ -10,6 +10,8 @@ import com.s8.api.flow.repository.objects.S8RepositoryMetadata;
 import com.s8.api.flow.repository.requests.GetRepositoryMetadataS8Request;
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
+import com.s8.fwks.palm.components.breadcrumbs.PalmBreadcrumbs;
+import com.s8.fwks.palm.components.breadcrumbs.PalmBreadcrumbsNode;
 import com.s8.fwks.palm.components.list.AccessStdListRow;
 import com.s8.fwks.palm.components.list.StdList;
 import com.s8.fwks.palm.components.list.StdListRow;
@@ -18,8 +20,6 @@ import com.s8.fwks.palm.components.structs.gs.GsBody;
 import com.s8.fwks.palm.components.structs.gs.GsHeader;
 import com.s8.fwks.palm.view.workspace.PalmWorkspaceViewer;
 import com.s8.pkgs.ui.carbide.CarbideSize;
-import com.s8.pkgs.ui.carbide.breadcrumbs.Breadcrumbs;
-import com.s8.pkgs.ui.carbide.breadcrumbs.BreadcrumbsNode;
 import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
 import com.s8.pkgs.ui.carbide.navbars.under.UnderlinedNavbar;
 import com.s8.pkgs.ui.carbide.navbars.under.UnderlinedNavbarMenu;
@@ -46,8 +46,11 @@ public class PalmRepositoryViewer {
 
 
 	private SimplePage page;
+	
+	
+	private PalmBreadcrumbsNode homeBreadcrumb;
 
-	private BreadcrumbsNode nameBreadcrumbsNode2;
+	private PalmBreadcrumbsNode nameBreadcrumbsNode2;
 
 	private StdList list;
 	
@@ -87,13 +90,15 @@ public class PalmRepositoryViewer {
 			TopbarImageButton imageButton = new TopbarImageButton(front);
 			imageButton.setImageURL("/logos/alphaventor-logo.png");
 
-
-
-
-			Breadcrumbs breadcrumbs = new Breadcrumbs(front);
-			breadcrumbs.setItems(new BreadcrumbsNode[] {
-					BreadcrumbsNode.create(front, SVG_CarbideIcon.home, "Home"),
-					nameBreadcrumbsNode2 = BreadcrumbsNode.create(front, SVG_CarbideIcon.repo, "${repository-name}")
+			PalmBreadcrumbs breadcrumbs = new PalmBreadcrumbs(front);
+			homeBreadcrumb = PalmBreadcrumbsNode.create(front, SVG_CarbideIcon.home, "Home2");
+			homeBreadcrumb.onClick(flow -> {
+				workspaceViewer.view(flow);	
+			});
+			
+			breadcrumbs.setItems(new PalmBreadcrumbsNode[] {
+					homeBreadcrumb,
+					nameBreadcrumbsNode2 = PalmBreadcrumbsNode.create(front, SVG_CarbideIcon.repo, "${repository-name}")
 			});
 			TopbarIconTextButton button1 = TopbarIconTextButton.create(front, SVG_CarbideIcon.sync, "Sync");
 			TopbarIconTextButton button2 = TopbarIconTextButton.create(front, SVG_CarbideIcon.save, "Save");
