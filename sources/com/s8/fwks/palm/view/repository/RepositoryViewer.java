@@ -1,12 +1,12 @@
 package com.s8.fwks.palm.view.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.s8.api.flow.S8AsyncFlow;
-import com.s8.api.flow.repository.objects.S8BranchMetadata;
 import com.s8.api.flow.repository.objects.S8RepositoryMetadata;
-import com.s8.api.flow.repository.requests.CloneBranchS8Request;
 import com.s8.api.flow.repository.requests.GetRepositoryMetadataS8Request;
 import com.s8.api.web.S8WebFront;
 import com.s8.api.web.S8WebObject;
@@ -16,8 +16,6 @@ import com.s8.fwks.palm.components.list.StdListRow;
 import com.s8.fwks.palm.components.pages.simple.SimplePage;
 import com.s8.fwks.palm.components.structs.gs.GsBody;
 import com.s8.fwks.palm.components.structs.gs.GsHeader;
-import com.s8.fwks.palm.model.branch.PalmProjectModel;
-import com.s8.fwks.palm.view.branch.PalmProjectViewer;
 import com.s8.pkgs.ui.carbide.CarbideSize;
 import com.s8.pkgs.ui.carbide.breadcrumbs.Breadcrumbs;
 import com.s8.pkgs.ui.carbide.breadcrumbs.BreadcrumbsNode;
@@ -28,12 +26,17 @@ import com.s8.pkgs.ui.carbide.topbar.Topbar;
 import com.s8.pkgs.ui.carbide.topbar.TopbarIconTextButton;
 import com.s8.pkgs.ui.carbide.topbar.TopbarImageButton;
 
+/**
+ * 
+ */
 public class RepositoryViewer {
 
 
 	public final S8WebFront front;
 
 	public final String repositoryAddress;
+	
+	public S8RepositoryMetadata repositoryMetadata;
 
 
 
@@ -42,6 +45,13 @@ public class RepositoryViewer {
 	private BreadcrumbsNode nameBreadcrumbsNode2;
 
 	private StdList list;
+	
+	
+	/**
+	 * caching of the branch views
+	 */
+	private final Map<String, BranchAccessor> branchAccessors = new HashMap<>();
+	
 
 	/**
 	 * 
@@ -146,17 +156,19 @@ public class RepositoryViewer {
 
 
 	private void refresh(S8RepositoryMetadata repositoryMetadata) {
+		
+		/**
+		 * cache metadata
+		 */
+		this.repositoryMetadata = repositoryMetadata;
 
 		nameBreadcrumbsNode2.setText(repositoryMetadata.getName());
 
 		List<StdListRow> rows = new ArrayList<>();
 
 		repositoryMetadata.crawlBranches((branchId, branchMetadata) -> {
-			AccessStdListRow row = AccessStdListRow.create(front, branchMetadata.getName(), branchMetadata.getInfo());
-			row.onClick(flow2 -> {
-				openBranch(flow2, repositoryMetadata, branchId, branchMetadata);
-			});
-			rows.add(row);
+			BranchAccessor accessor = branchAccessors.computeIfAbsent(branchId, id -> new BranchAccessor(this, id));
+			rows.add(accessor.view(front, branchMetadata));
 		});
 		list.setRows(rows);
 	}
@@ -176,7 +188,6 @@ public class RepositoryViewer {
 
 			@Override
 			public void onSucceed(Status status, S8RepositoryMetadata repositoryMetadata) {
-
 				if(status == Status.OK) {
 					refresh(repositoryMetadata);
 					page.publish();
@@ -184,7 +195,6 @@ public class RepositoryViewer {
 				else {
 					System.out.println("[Palm/S8RepositoryViewer] failed to display, status: "+status);
 				}
-
 			}
 
 			@Override
@@ -198,49 +208,4 @@ public class RepositoryViewer {
 
 
 
-
-	private void openBranch(S8AsyncFlow flow,
-			S8RepositoryMetadata repositoryMetadata,
-			String branchId, S8BranchMetadata branchMetadata) {
-		/**
-		 * 
-		 */
-		flow.cloneBranch(new CloneBranchS8Request(repositoryAddress, branchId) {
-
-			@Override
-			public void onResponse(Status status, Object[] objects) {
-				if(status == Status.OK) {
-
-					// offload db
-					flow.runBlock(0, () -> {
-
-						/*
-						 * retrieve model
-						 */
-						PalmProjectModel model = (PalmProjectModel) objects[0];
-
-						/*
-						 * Create view
-						 */
-						PalmProjectViewer viewer = model.getViewer(front, repositoryMetadata, branchMetadata);
-
-
-						/*
-						 * issue page
-						 */
-						viewer.view();
-
-					});
-				}
-			}
-
-			@Override
-			public void onError(Exception exception) {
-				exception.printStackTrace();
-			}
-		});
-		
-		flow.send();
-
-	}
 }

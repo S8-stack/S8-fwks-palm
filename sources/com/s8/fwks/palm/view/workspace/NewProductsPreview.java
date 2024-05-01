@@ -1,4 +1,4 @@
-package com.s8.fwks.palm.view;
+package com.s8.fwks.palm.view.workspace;
 
 import static com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size.LARGE_HORIZONTAL;
 import static com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size.LARGE_SQUARE;

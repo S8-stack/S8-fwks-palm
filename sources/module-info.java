@@ -7,16 +7,19 @@
 open module com.s8.fwks.palm {
 	
 	
-	
+
+	/* <model> */
 	exports com.s8.fwks.palm.model.branch;
 	exports com.s8.fwks.palm.model.space;
 	exports com.s8.fwks.palm.model.user;
+	/* </model> */
 	
-	
-	exports com.s8.fwks.palm.view;
+
+	/* <view> */
 	exports com.s8.fwks.palm.view.branch;
 	exports com.s8.fwks.palm.view.repository;
 	exports com.s8.fwks.palm.view.workspace;
+	/* </view> */
 	
 	
 	
@@ -31,6 +34,8 @@ open module com.s8.fwks.palm {
 	
 	exports com.s8.fwks.palm.components.structs.columns;
 	exports com.s8.fwks.palm.components.structs.gs;
+	
+	exports com.s8.fwks.palm.components.list;
 	
 	exports com.s8.fwks.palm.components.pages.simple;
 	
