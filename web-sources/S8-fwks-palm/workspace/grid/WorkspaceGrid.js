@@ -16,7 +16,7 @@ S8WebFront.CSS_import('/S8-fwks-palm/workspace/grid/WorkspaceGrid.css');
 export class WorkspaceGrid extends S8Object {
 
 
-    constructor(){
+    constructor() {
         super();
         this.wrapperNode = document.createElement("div");
         this.wrapperNode.classList.add("workspace-grid-wrapper");
@@ -32,25 +32,28 @@ export class WorkspaceGrid extends S8Object {
         }, false);
     }
 
-    S8_render(){ /* continuous rendering approach... */ }
+    S8_render() { /* continuous rendering approach... */ }
 
-    getEnvelope(){
+    getEnvelope() {
         return this.wrapperNode;
     }
-    
+
 
     /**
      * 
      * @param {WorkspaceGridCard[]} cards 
      */
-    S8_set_cards(cards){
+    S8_set_cards(cards) {
 
         /* clear wrapper node content */
-       while(this.coreNode.hasChildNodes()){ this.coreNode.removeChild(this.coreNode.lastChild); }
-       
-       /* append cards */
-       cards.forEach(card => this.coreNode.appendChild(card.getEnvelope()));
+        while (this.coreNode.hasChildNodes()) { this.coreNode.removeChild(this.coreNode.lastChild); }
+
+        /* sorting cards */
+        cards.sort((a, b) => b.priority - a.priority);
+
+        /* append cards */
+        cards.forEach(card => this.coreNode.appendChild(card.getEnvelope()));
     }
 
-    S8_dispose(){ /* continuous rendering approach... */ }
+    S8_dispose() { /* continuous rendering approach... */ }
 }

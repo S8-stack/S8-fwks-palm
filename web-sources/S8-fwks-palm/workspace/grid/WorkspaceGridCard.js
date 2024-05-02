@@ -15,6 +15,11 @@ export class WorkspaceGridCard extends S8Object {
     popover = null;
 
 
+    /**
+     * @type{number} priority order
+     */
+    priority = 0;
+
 
     constructor(){
         super();
@@ -93,6 +98,14 @@ export class WorkspaceGridCard extends S8Object {
      */
      S8_set_theme(code){
         this.containerNode.setAttribute("theme", this.parseThemeCode(code));
+    }
+
+    /**
+     * 
+     * @param {number} priority 
+     */
+    S8_set_priority(priority){
+        this.priority = priority;
     }
 
 
