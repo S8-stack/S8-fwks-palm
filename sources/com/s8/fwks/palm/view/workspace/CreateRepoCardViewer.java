@@ -1,6 +1,7 @@
 package com.s8.fwks.palm.view.workspace;
 
 import com.s8.api.web.S8WebFront;
+import com.s8.fwks.palm.components.workspace.grid.CreateWorkspaceGridCard;
 import com.s8.pkgs.ui.carbide.collections.grids.r2.CreateR2GridCard;
 import com.s8.pkgs.ui.carbide.collections.grids.r2.R2Grid;
 
@@ -10,15 +11,13 @@ import com.s8.pkgs.ui.carbide.collections.grids.r2.R2Grid;
 public class CreateRepoCardViewer {
 	
 	
-	public final SpaceViewer gridViewer;
-
 	
 	
 	
 	/**
 	 * form viewer
 	 */
-	private CreateRepoFormViewer formViewer = new CreateRepoFormViewer(this);
+	private CreateWorkspaceGridCard formViewer;
 	
 	
 	/**
