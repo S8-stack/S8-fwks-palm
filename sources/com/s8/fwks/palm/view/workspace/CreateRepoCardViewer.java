@@ -12,10 +12,7 @@ public class CreateRepoCardViewer {
 	
 	public final SpaceViewer gridViewer;
 
-	/**
-	 * card viewer
-	 */
-	private CreateR2GridCard cardView;
+	
 	
 	
 	/**
@@ -41,22 +38,7 @@ public class CreateRepoCardViewer {
 	 * @return
 	 */
 	public CreateR2GridCard getView(S8WebFront front, R2Grid grid) {
-		if(cardView == null) {
-			
-			cardView = new CreateR2GridCard(front);
-			
-			cardView.onClickLambda(() -> {
-				
-				// unselect other cards
-				grid.unselectAllCards();
-
-				// select this one
-				cardView.setSelected(true);
-				
-				// set popover form
-				cardView.setPopover(formViewer.getFormView(front, cardView));
-			});
-		}
+	
 		
 		// nothing to refresh
 		

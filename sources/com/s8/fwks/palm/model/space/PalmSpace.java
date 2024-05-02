@@ -24,7 +24,7 @@ public class PalmSpace extends SpaceS8Object {
 	
 	
 	@S8Field(name = "repositories")
-	private List<PalmRepositoryAccess> repositoryAccesses;
+	private List<PalmRepositoryLink> repositoryAccesses;
 	
 	
 	public PalmSpace() {
@@ -49,7 +49,7 @@ public class PalmSpace extends SpaceS8Object {
 	 * @param repositoryAccesses
 	 * @throws S8IOException
 	 */
-	public void setRepositories(List<PalmRepositoryAccess> repositoryAccesses) throws S8IOException {
+	public void setRepositories(List<PalmRepositoryLink> repositoryAccesses) throws S8IOException {
 		this.repositoryAccesses = repositoryAccesses;
 		reportFieldUpdate("repositories");
 	}
@@ -67,7 +67,7 @@ public class PalmSpace extends SpaceS8Object {
 	 * 
 	 * @param consumer
 	 */
-	public void forEachRepository(Consumer<PalmRepositoryAccess> consumer) {
+	public void forEachRepository(Consumer<PalmRepositoryLink> consumer) {
 		this.repositoryAccesses.forEach(consumer);
 	}
 
@@ -77,7 +77,7 @@ public class PalmSpace extends SpaceS8Object {
 	 * @param access
 	 * @throws S8IOException
 	 */
-	public void addRepositoryAccess(PalmRepositoryAccess access) throws S8IOException {
+	public void addRepositoryAccess(PalmRepositoryLink access) throws S8IOException {
 		this.repositoryAccesses.add(access);
 		reportFieldUpdate("repositories");
 	}

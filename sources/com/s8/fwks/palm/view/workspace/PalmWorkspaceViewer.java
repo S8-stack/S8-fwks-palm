@@ -31,10 +31,14 @@ import com.s8.pkgs.ui.carbide.icons.SVG_CarbideIcon;
  */
 public class PalmWorkspaceViewer {
 	
+	public final NewProductsFeed feed;
+	
 	public final S8WebFront front;
 	
+	
+	
 
-	private final Map<String, RepoCardAccessor> cardViewers = new HashMap<>();
+	private final Map<String, RepositoryAccessor> accessors = new HashMap<>();
 
 	private boolean isInitialized = false;
 	
@@ -48,8 +52,9 @@ public class PalmWorkspaceViewer {
 	 * 
 	 * @param alphaView
 	 */
-	public PalmWorkspaceViewer(S8WebFront front) {
+	public PalmWorkspaceViewer(NewProductsFeed feed, S8WebFront front) {
 		super();
+		this.feed = feed;
 		this.front = front;
 	}
 
@@ -141,11 +146,18 @@ public class PalmWorkspaceViewer {
 		 * Already existing repositories
 		 */
 		space.forEachRepository(access -> {
-			String repoAddress = access.repositoryAddress;
-			RepoCardAccessor cardViewer = cardViewers.computeIfAbsent(repoAddress, address -> new RepoCardAccessor(this, address));
-			cardViewer.update(front, access);
-			cardViews.add(cardViewer.getView());
+			String repoAddress = access.getRepositoryAddress();
+			RepositoryAccessor accessor = accessors.computeIfAbsent(repoAddress, address -> new RepositoryAccessor(this, address));
+			accessor.update(front, access);
+			cardViews.add(accessor.getView());
 		});
+		
+		
+		feed.pull().forEach(creator -> {
+			creator.update(front);
+			cardViews.add(creator.getView());
+		});
+		
 
 		grid.setCards(cardViews);	
 	}

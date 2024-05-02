@@ -11,9 +11,9 @@ import com.s8.api.flow.space.objects.SpaceS8Object;
  *
  */
 @S8ObjectType(name = "com.s8.fwks.palm.model.space.PalmRepositoryAccess")
-public class PalmRepositoryAccess extends SpaceS8Object {
-	
-	
+public class PalmRepositoryLink extends SpaceS8Object {
+
+
 	/**
 	 * 
 	 * @param repositoryAddress
@@ -23,13 +23,13 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	 * @return
 	 * @throws S8IOException
 	 */
-	public static PalmRepositoryAccess create(
+	public static PalmRepositoryLink create(
 			String repositoryAddress, 
 			String image, 
 			String title, 
 			String type, 
 			String info) throws S8IOException {
-		PalmRepositoryAccess repository = new PalmRepositoryAccess();
+		PalmRepositoryLink repository = new PalmRepositoryLink();
 		repository.setRepositoryAddress(repositoryAddress);
 		repository.setImage(image);
 		repository.setTitle(title);
@@ -42,46 +42,46 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	/**
 	 * 
 	 */
-	public @S8Field(name = "repository-address") String repositoryAddress;
-	
-	
+	private @S8Field(name = "repository-address") String repositoryAddress;
+
+
 	/**
 	 * 
 	 */
-	public @S8Field(name = "image") String imageURL;
+	private @S8Field(name = "image") String imageURL;
 
-	
+
 	/**
 	 * title
 	 */
-	public @S8Field(name = "title") String title;
-	
-	
+	private @S8Field(name = "title") String title;
+
+
 	/**
 	 * type
 	 */
-	public @S8Field(name = "type") String type;
-	
+	private @S8Field(name = "type") String type;
+
 
 	/**
 	 * info
 	 */
-	public @S8Field(name = "info") String info;
-
-	
+	private @S8Field(name = "info") String info;
 
 
-	
+
+
+
 	/**
 	 * S8 constructor
 	 */
-	public PalmRepositoryAccess() {
+	public PalmRepositoryLink() {
 		super();
 	}
-	
-	
 
-	
+
+
+
 	/**
 	 * 
 	 * @param address
@@ -91,8 +91,18 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		this.repositoryAddress = address;
 		reportFieldUpdate("repository-address");
 	}
-	
-	
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getRepositoryAddress() {
+		return repositoryAddress;
+	}
+
+
+
+
 	/**
 	 * 
 	 * @param address
@@ -102,8 +112,17 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		this.imageURL = image;
 		reportFieldUpdate("image");
 	}
-	
-	
+
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getImage() {
+		return imageURL;
+	}
+
+
 	/**
 	 * 
 	 * @param title
@@ -114,7 +133,16 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		reportFieldUpdate("title");
 	}
 	
-	
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+
 	/**
 	 * 
 	 * @param type
@@ -125,7 +153,14 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		reportFieldUpdate("type");
 	}
 	
-	
+	/**
+	 * @param type
+	 */
+	public String getType() {
+		return type;
+	}
+
+
 	/**
 	 * 
 	 * @param type
@@ -135,9 +170,18 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		this.info = info;
 		reportFieldUpdate("info");
 	}
+	
 
-	
-	
-	
-	
+	/**
+	 * 
+	 * @param type
+	 */
+	public String getInfo() {
+		return info;
+	}
+
+
+
+
+
 }

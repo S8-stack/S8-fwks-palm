@@ -27,6 +27,10 @@ public class WorkspaceGridCard extends S8WebObject {
 	}
 
 	
+	
+	public double priority;
+	
+	
 	/**
 	 * 
 	 * @param branch
@@ -95,6 +99,15 @@ public class WorkspaceGridCard extends S8WebObject {
 	 */
 	public void onClickLambda(VoidLambda lambda) {
 		vertex.inbound().setVoidMethodLambda("on-click", lambda);
+	}
+	
+	
+	/**
+	 * 
+	 * @param size
+	 */
+	public void setPriority(double priority) {
+		vertex.outbound().setFloat32Field("priority", (float) priority);
 	}
 	
 	
