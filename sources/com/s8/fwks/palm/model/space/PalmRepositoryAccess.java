@@ -11,7 +11,7 @@ import com.s8.api.flow.space.objects.SpaceS8Object;
  *
  */
 @S8ObjectType(name = "com.s8.fwks.palm.model.space.PalmRepositoryAccess")
-public class PalmRepositoryLink extends SpaceS8Object {
+public class PalmRepositoryAccess extends SpaceS8Object {
 
 
 	/**
@@ -23,13 +23,13 @@ public class PalmRepositoryLink extends SpaceS8Object {
 	 * @return
 	 * @throws S8IOException
 	 */
-	public static PalmRepositoryLink create(
+	public static PalmRepositoryAccess create(
 			String repositoryAddress, 
 			String image, 
 			String title, 
 			String type, 
 			String info) throws S8IOException {
-		PalmRepositoryLink repository = new PalmRepositoryLink();
+		PalmRepositoryAccess repository = new PalmRepositoryAccess();
 		repository.setRepositoryAddress(repositoryAddress);
 		repository.setImage(image);
 		repository.setTitle(title);
@@ -75,7 +75,7 @@ public class PalmRepositoryLink extends SpaceS8Object {
 	/**
 	 * S8 constructor
 	 */
-	public PalmRepositoryLink() {
+	public PalmRepositoryAccess() {
 		super();
 	}
 

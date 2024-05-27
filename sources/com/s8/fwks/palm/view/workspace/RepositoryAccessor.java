@@ -3,7 +3,7 @@ package com.s8.fwks.palm.view.workspace;
 import com.s8.api.web.S8WebFront;
 import com.s8.fwks.palm.components.workspace.grid.AccessWorkspaceGridCard;
 import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size;
-import com.s8.fwks.palm.model.space.PalmRepositoryLink;
+import com.s8.fwks.palm.model.space.PalmRepositoryAccess;
 import com.s8.fwks.palm.view.repository.PalmRepositoryViewer;
 
 /**
@@ -77,7 +77,7 @@ public class RepositoryAccessor extends RepositoryHandler {
 	 * @param front
 	 * @param flow
 	 */
-	public void repaint(PalmRepositoryLink repositoryAccess) {
+	public void repaint(PalmRepositoryAccess repositoryAccess) {
 		cardView.setImageURL(repositoryAccess.getImage());
 		cardView.setPanelContent("<h1>"+repositoryAccess.getTitle()
 		+"</h1><h2>"+repositoryAccess.getType()
@@ -88,7 +88,7 @@ public class RepositoryAccessor extends RepositoryHandler {
 	}
 
 
-	public void update(S8WebFront front, PalmRepositoryLink repositoryAccess) {
+	public void update(S8WebFront front, PalmRepositoryAccess repositoryAccess) {
 		initialize(front);
 		repaint(repositoryAccess);
 	}
