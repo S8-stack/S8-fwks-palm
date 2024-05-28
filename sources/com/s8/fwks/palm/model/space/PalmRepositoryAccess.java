@@ -4,6 +4,8 @@ import com.s8.api.annotations.S8Field;
 import com.s8.api.annotations.S8ObjectType;
 import com.s8.api.exceptions.S8IOException;
 import com.s8.api.flow.space.objects.SpaceS8Object;
+import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Size;
+import com.s8.fwks.palm.components.workspace.grid.WorkspaceGridCard.Theme;
 
 /**
  * 
@@ -25,18 +27,24 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	 */
 	public static PalmRepositoryAccess create(
 			String repositoryAddress, 
-			String image, 
 			String title, 
 			String type, 
-			String info) throws S8IOException {
+			String info,
+			String image, 
+			Theme theme, 
+			Size size) throws S8IOException {
 		PalmRepositoryAccess repository = new PalmRepositoryAccess();
 		repository.setRepositoryAddress(repositoryAddress);
-		repository.setImage(image);
 		repository.setTitle(title);
 		repository.setType(type);
 		repository.setInfo(info);
+		repository.setImage(image);
+		repository.setTheme(theme);
+		repository.size = size;
 		return repository;
 	}
+
+
 
 
 	/**
@@ -44,11 +52,6 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	 */
 	private @S8Field(name = "repository-address") String repositoryAddress;
 
-
-	/**
-	 * 
-	 */
-	private @S8Field(name = "image") String imageURL;
 
 
 	/**
@@ -67,6 +70,23 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	 * info
 	 */
 	private @S8Field(name = "info") String info;
+
+
+	/**
+	 * 
+	 */
+	private @S8Field(name = "image") String imageURL;
+
+
+	/**
+	 * 
+	 */
+	private @S8Field(name = "theme") Theme theme;
+	
+	/**
+	 * 
+	 */
+	private @S8Field(name = "size") Size size;
 
 
 
@@ -100,27 +120,6 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 		return repositoryAddress;
 	}
 
-
-
-
-	/**
-	 * 
-	 * @param address
-	 * @throws S8IOException
-	 */
-	public void setImage(String image) throws S8IOException {
-		this.imageURL = image;
-		reportFieldUpdate("image");
-	}
-
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getImage() {
-		return imageURL;
-	}
 
 
 	/**
@@ -179,9 +178,48 @@ public class PalmRepositoryAccess extends SpaceS8Object {
 	public String getInfo() {
 		return info;
 	}
+	
+	
+
+
+	/**
+	 * 
+	 * @param address
+	 * @throws S8IOException
+	 */
+	public void setImage(String image) throws S8IOException {
+		this.imageURL = image;
+		reportFieldUpdate("image");
+	}
+
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getImage() {
+		return imageURL;
+	}
 
 
 
+	private void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
+	
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+
+
+
+	public Size getSize() {
+		return size;
+	}
+	
 
 
 }

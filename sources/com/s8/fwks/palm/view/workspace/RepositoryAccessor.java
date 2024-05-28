@@ -79,6 +79,8 @@ public class RepositoryAccessor extends RepositoryHandler {
 	 */
 	public void repaint(PalmRepositoryAccess repositoryAccess) {
 		cardView.setImageURL(repositoryAccess.getImage());
+		cardView.setTheme(repositoryAccess.getTheme());
+		cardView.setSize(repositoryAccess.getSize());
 		cardView.setPanelContent("<h1>"+repositoryAccess.getTitle()
 		+"</h1><h2>"+repositoryAccess.getType()
 		+"</h2><p>"+repositoryAccess.getInfo()+"</p>");
